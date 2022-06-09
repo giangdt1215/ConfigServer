@@ -18,3 +18,10 @@ server:
 
 encrypt:
   key: bd5cae3b97d93e385232afd4c0ea92377a193328
+
+#Enable all Spring Boot Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
