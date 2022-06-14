@@ -15,6 +15,28 @@ spring:
     loadbalancer:
       ribbon:
         enabled: false
+    #Automated mapping of routes via service discovery
+    gateway:
+      discovery.locator:
+        enabled: true
+        lowerCaseServiceId: true
+      #Manually mapping routes using service discovery
+      routes:
+        - id: organization-service
+          uri: lb://organization-service
+
+          predicates:
+            - Path=/organization/**
+          filters:
+            - RewritePath=/organization/(?<path>.*), /$\{path}
+
+        - id: licensing-service
+          uri: lb://licensing-service
+
+          predicates:
+            - Path=/license/**
+          filters:
+            - RewritePath=/license/(?<path>.*), /$\{path}
 
 management:
   endpoints:
