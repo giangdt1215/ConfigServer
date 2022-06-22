@@ -8,15 +8,16 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:8070/eureka
+      defaultZone: http://eurekaserver:8070/eureka
+      #defaultZone: http://localhost:8070/eureka
 
 spring:
   cloud:
     loadbalancer:
       ribbon:
         enabled: false
-    #Automated mapping of routes via service discovery
     gateway:
+      #Automated mapping of routes via service discovery
       discovery.locator:
         enabled: true
         lowerCaseServiceId: true
@@ -43,3 +44,7 @@ management:
     web:
       exposures:
         include: "*"
+    enabled-by-default: true
+    health:
+      enabled: true
+      show-details: always
